@@ -4,18 +4,17 @@ import numpy as np
 import pickle
 
 
-
 # Load the model from the file
-with open('ridge_model.pkl', 'rb') as f:
+with open('GAProj2/ridge_model.pkl', 'rb') as f:
     ridgeRegressor = pickle.load(f)
 
 # Load the scaler from the file
-with open('scaler.pkl', 'rb') as f:
+with open('GAProj2/scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Load the median values from the CSV file
 
-medians = pd.read_csv('medians.csv', index_col=0)
+medians = pd.read_csv('GAProj2/medians.csv', index_col=0)
 
 
 # Set Page configuration
@@ -90,29 +89,19 @@ df_scaled = pd.DataFrame(scaler.transform(df), columns=df.columns)
 # Predict the resale price
 predicted_price = ridgeRegressor.predict(df_scaled)
 
-# Display the predicted resale price
-st.subheader('Predicted Resale Price')
-st.write(predicted_price)
 
 
-
-
-
-# Select the columns used for prediction
-df = df[selected_col]
-
-# Scale the feature values
-df_scaled = pd.DataFrame(scaler.transform(df), columns=df.columns)
-
-# Predict the resale price
-predicted_price = ridgeRegressor.predict(df_scaled)
 
 # Display the predicted resale price
 st.subheader('Predicted Resale Price')
-st.write(predicted_price)
+
+predicted_price_value = predicted_price.item()  # Extract the value from the ndarray
+st.write("SGD$" + "{:,.0f}".format(predicted_price_value))
 
 
+st.divider()
 
 
 #run:
 #          streamlit run "c:/Users/chaaa/Documents/GitHub/GAProj2/GAProj2/app2.py"
+#   streamlit run "/Users/charles/Desktop/GitHub/DSI-SG-37/GAProj2/app2.py"
