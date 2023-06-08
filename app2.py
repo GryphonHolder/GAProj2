@@ -91,7 +91,6 @@ predicted_price_value = predicted_price.item()  # Extract the value from the nda
 st.write("SGD$" + "{:,.0f}".format(predicted_price_value))
 
 
-st.divider()
 
 
 #run:
