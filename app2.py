@@ -5,11 +5,11 @@ import pickle
 
 
 # Load the model from the file
-with open('GAProj2/ridge_model.pkl', 'rb') as f:
+with open('ridge_model.pkl', 'rb') as f:
     ridgeRegressor = pickle.load(f)
 
 # Load the scaler from the file
-with open('GAProj2/scaler.pkl', 'rb') as f:
+with open('scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Load the median values from the CSV file
