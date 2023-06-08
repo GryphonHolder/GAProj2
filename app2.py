@@ -37,7 +37,6 @@ mrt_name = st.sidebar.slider('Nearest MRT', 0, 10, int(medians.loc['mrt_name'].i
 
 
 
-
 selected_col = ['floor_area_sqm', 'pri_sch_name_low','max_floor_lvl', 'flat_model_low', 'sec_sch_name_low', 'hdb_age', 'hawker_within_2km',
 'mrt_nearest_distance', 'flat_model_mid', 'mrt_name', 'mid', 'planning_area_low', 'sec_sch_nearest_dist',
 'mall_within_2km', 'sqm_year_max_floor', 'max_floor_5room', 'age_3room', 'floor_hawker2km', 'age_totalunit', 'year_floor', 'maxfloor_secsch', 'year_age', 'age_execsold', 'age_pri_sch', 'floor_hawker', 'floor_mall1km', 'storey_range', 'which_floor', 'floor_maxfloor']
@@ -69,6 +68,19 @@ for col in selected_col:
 
 # Select the columns used for prediction```python
 df = df[selected_col]
+
+# Define the columns to be transformed
+skew_list_log = ['floor_maxfloor', 'which_floor', 'maxfloor_secsch']
+skew_list = ['mall_within_2km', 'age_execsold', 'floor_hawker2km', 'floor_mall1km', 'floor_hawker', 'max_floor_5room']
+
+# Apply log and square root transformations
+for col in skew_list_log:
+    if col in df.columns:
+        df[col] = np.log(df[col])
+
+for col in skew_list:
+    if col in df.columns:
+        df[col] = np.sqrt(df[col])
 
 # Scale the feature values
 df_scaled = pd.DataFrame(scaler.transform(df), columns=df.columns)
