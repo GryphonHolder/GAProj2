@@ -3,26 +3,18 @@ import pandas as pd
 import numpy as np
 import pickle
 
-
-# Load the model from the file
+#Load the model from the file
 with open('ridge_model.pkl', 'rb') as f:
     ridgeRegressor = pickle.load(f)
-
 # Load the scaler from the file
 with open('scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
-
 # Load the median values from the CSV file
-
-medians = pd.read_csv('GAProj2/medians.csv', index_col=0)
-
-
+medians = pd.read_csv('medians.csv', index_col=0)
 # Set Page configuration
 st.set_page_config(page_title='Predict HDB Resale Price', page_icon='🏠', layout='wide', initial_sidebar_state='expanded')
-
 # Set title of the app
 st.title('🏠 Predict HDB Resale Price')
-
 
 
 # Set input widgets
